@@ -33,6 +33,8 @@
   .card small{color:var(--soft);font-size:13px;flex:1;}
   .chips{display:flex;flex-wrap:wrap;gap:5px;}
   .chips span{font-size:11.5px;background:var(--chip);color:var(--soft);padding:2px 8px;border-radius:20px;}
+  .pres{align-self:flex-start;font-size:12.5px;font-weight:700;color:var(--cyan);border:1px solid var(--line);border-radius:8px;padding:5px 9px;cursor:pointer;}
+  .pres:hover{border-color:var(--cyan);}
   footer{border-top:1px solid var(--line);margin-top:28px;padding:18px 0 40px;font-size:12.5px;color:var(--soft);}
 </style>
 </head>
@@ -64,7 +66,8 @@
     ["08-spindle-head","Spindle Head Assembly","Rumah head, kartrid spindle, antarmuka tool holder, dan penggerak.",["Kartrid spindle","Bantalan","Tool holder","Coolant"]]
   ];
   document.getElementById("grid").innerHTML = M.map(([k,t,d,c],i)=>
-    `<a class="card" href="modul/${k}.html"><img src="modul/${k}.jpg" alt="Ilustrasi ${t}" loading="lazy"><div><span class="num">MODUL ${String(i+1).padStart(2,"0")}</span><b>${t}</b><small>${d}</small><span class="chips">${c.map(x=>`<span>${x}</span>`).join("")}</span></div></a>`).join("");
+    `<a class="card" href="modul/${k}.html"><img src="modul/${k}.jpg" alt="Ilustrasi ${t}" loading="lazy"><div><span class="num">MODUL ${String(i+1).padStart(2,"0")}</span><b>${t}</b><small>${d}</small><span class="chips">${c.map(x=>`<span>${x}</span>`).join("")}</span>${i<4?`<span class="pres" data-href="presentasi/${k}.pdf">🖼️ Presentasi (PDF)</span>`:""}</div></a>`).join("");
+  document.querySelectorAll(".pres").forEach(s=>s.addEventListener("click",ev=>{ev.preventDefault();ev.stopPropagation();window.open(s.dataset.href,"_blank","noopener");}));
 </script>
 </body>
 </html>
